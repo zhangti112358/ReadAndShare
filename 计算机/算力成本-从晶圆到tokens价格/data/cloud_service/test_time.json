@@ -1,0 +1,27 @@
+{
+    "Pro/Qwen/Qwen2-1.5B-Instruct": {
+        "first": 0.22466325759887695,
+        "tps": 138.14756962299293,
+        "tokens": 98
+    },
+    "Pro/Qwen/Qwen2-7B-Instruct": {
+        "first": 0.18755793571472168,
+        "tps": 85.44453602409831,
+        "tokens": 98
+    },
+    "01-ai/Yi-1.5-34B-Chat-16K": {
+        "first": 0.23479866981506348,
+        "tps": 59.72448843372822,
+        "tokens": 96
+    },
+    "deepseek-ai/deepseek-llm-67b-chat": {
+        "first": 0.2773308753967285,
+        "tps": 32.00157660277329,
+        "tokens": 94
+    },
+    "meta-llama/Meta-Llama-3.1-405B-Instruct": {
+        "first": 0.27298855781555176,
+        "tps": 51.24795111637048,
+        "tokens": 100
+    }
+}
