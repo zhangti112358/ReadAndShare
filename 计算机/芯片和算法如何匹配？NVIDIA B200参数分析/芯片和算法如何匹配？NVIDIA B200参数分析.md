@@ -99,10 +99,7 @@ B200 NVL72互联方式：72个GPU之间1.8TB/s的NVLink互联。
 
 向量加的值很小（1/3），很多其他简单计算也是。矩阵乘的值用“M，K，N”表示不容易看出具体大小，将这三个值按“大，中，小”带入化简：
 
-$$
-\frac{大中小*2}{大中+大小+中小} = \frac{小*2}{1+小/中+小/大}
-
-$$
+(大中小x2)/(大中+大小+中小) = (小x2)/(1+小/中+小/大)
 
 + 极端情况1，大中小相同，值为：小*2/3。
 + 极端情况2，大中小差异很大，值为：小*2。
@@ -243,23 +240,36 @@ s的值分2个阶段：
 大模型效率优化：
 
 [大模型加速系列文章](https://zhuanlan.zhihu.com/p/654910335)
+
 [LLM大模型推理部署优化技术综述](https://zhuanlan.zhihu.com/p/655557420)
 
 当前痛点“带宽需求”及其解决方案的讨论：
 
 [Bill Dally 演讲 HOTI 2023](https://www.youtube.com/watch?v=napEsaJ5hMU)
+
 [tsmc 关于下一代工厂的采访](https://morethanmoore.substack.com/p/q-and-a-with-tsmc-on-next-gen-foundry)
+
 [站在AI Scale-Up域的一个岔路口](https://zhuanlan.zhihu.com/p/707355769)
+
 [LLM推理到底需要什么样的芯片](https://zhuanlan.zhihu.com/p/683359705)
 
 ## 数据引用
 
 [NVIDIA B200 参数](https://www.nvidia.com/en-us/data-center/gb200-nvl72/)
+
 [NVIDIA B200 晶体管数量](https://www.techpowerup.com/gpu-specs/b200-sxm-192-gb.c4210)
+
 [NVIDIA B200 制程 芯片面积](https://spectrum.ieee.org/nvidia-blackwell)
+
 [NVIDIA H100 参数](https://www.nvidia.com/en-us/data-center/h100/)
+
 [NVIDIA H100 晶体管数量 芯片面积](https://www.techpowerup.com/gpu-specs/h100-pcie-80-gb.c3899)
+
 [GB200 推理加速数据：GPT-MoE 1.8T 推理文章](https://developer.nvidia.com/blog/demystifying-ai-inference-deployments-for-trillion-parameter-large-language-models/)
+
 [GPT3 论文](https://arxiv.org/abs/2005.14165)
+
 [reticle limit 26x33](https://www.anandtech.com/show/18876/tsmc-preps-sixreticlesize-super-carrier-interposer-for-extreme-sips)
+
 [DGX H100 推理Llama 405B 速度](https://www.nextplatform.com/2024/09/10/the-battle-begins-for-ai-inference-compute-in-the-datacenter/)
+
