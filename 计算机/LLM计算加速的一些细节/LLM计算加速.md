@@ -13,9 +13,18 @@
 2. 分块之间建立表格。逻辑连续的块，物理地址无需连续。
 3. 序列中前面部分相同，从某个位置不同的情况。可以共享前面一部分块。比如parallel sampling，beam search，相同prompt情况。
 
+## FlashAttention
+
+加速Attention计算 Attention(Q,K,V) = softmax(QK'/sqrt(d))V
+
+1. 单独计算每一步，需要读写多次中间结果到显存。为了加速，使用计算融合，中间结果存在共享内存（SRAM）上。
+2. 共享内存无法存下整个矩阵的中间数据，所以计算要分块。
+3. 计算分块，而softmax计算需要向量的所有值，产生矛盾。解决方法是先计算单块的softmax，并记录此块的求和，当所有分块的softmax计算完成后，更新之前分块的softmax值。单块的softmax和全局softmax值差异为除的分母不同，所以乘一个系数即可得到最终结果。
 
 
 
 # 附 参考文章
 
 ![SayHelloCode-vLLM系列](https://zhuanlan.zhihu.com/p/680153425)
+
+![Attention加速](https://zhuanlan.zhihu.com/p/638468472)
