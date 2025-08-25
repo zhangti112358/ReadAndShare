@@ -21,10 +21,37 @@
 2. 共享内存无法存下整个矩阵的中间数据，所以计算要分块。
 3. 计算分块，而softmax计算需要向量的所有值，产生矛盾。解决方法是先计算单块的softmax，并记录此块的求和，当所有分块的softmax计算完成后，更新之前分块的softmax值。单块的softmax和全局softmax值差异为除的分母不同，所以乘一个系数即可得到最终结果。
 
+# 模型结构
 
+## MOE 架构
+
+将FFN计算分为多个专家，根据数据特征选择部分专家计算，减少计算量。
+1. 采用路由机制选择专家。
+2. 分共享专家（所有数据都计算的）和路由专家（选择计算）。
+3. 多个专家可能存在负载不平衡问题。在选择模块加入可学习参数，平衡多个专家的被选择概率
+
+## 多头隐式注意力 (Multi-Head Latent Attention)
+
+目标：减少KV cache存储。比如：
+1. GQA，MQA：一个KV对应多个Q，降低KV数量。
+2. MLA：对KV矩阵做低秩分解，得到低维隐向量。计算时升维得到原始数据。
+
+## 多令牌预测
+
+一次性生成多个tokens。
+
+1. 主模型计算第一个token。
+2. MTP模型计算第2个token。（和主模型共用embedding层和输出层，中间计算量更小）
+3. MTP模型2计算第3个token，以此类推。
+
+DeepSeek V3：训练时使用MTP可以提升回复质量，推理时未使用。
+
+## 计算精度 混合精度训练
 
 # 附 参考文章
 
 ![SayHelloCode-vLLM系列](https://zhuanlan.zhihu.com/p/680153425)
 
 ![Attention加速](https://zhuanlan.zhihu.com/p/638468472)
+
+![DeepSeek关键技术详解](https://zhuanlan.zhihu.com/p/23048347789)
